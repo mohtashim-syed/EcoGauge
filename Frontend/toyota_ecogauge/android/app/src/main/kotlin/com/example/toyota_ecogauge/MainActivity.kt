@@ -1,4 +1,4 @@
-package com.example.toyota_ecogauge
+package com.toyota.tech
 
 import io.flutter.embedding.android.FlutterActivity
 
