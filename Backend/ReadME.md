@@ -81,9 +81,13 @@ By default, the app will be available at `http://127.0.0.1:5000`.
 ---
 
 ## Deployment
-For production deployment:
-1. Use a production-ready server (e.g., Gunicorn).
-2. Set up environment variables securely.
+### Running the Application with Gunicorn
+For a production-ready deployment, you can use Gunicorn to run the application. Below are the steps to set it up:
+#### Gunicorn
+Make sure Gunicorn is installed in your virtual environment:
+```bash
+1. pip install gunicorn
+2. gunicorn -w 4 -b 0.0.0.0:8000 wgsi:app
 3. Use a reverse proxy (e.g., Nginx).
 
 ---
