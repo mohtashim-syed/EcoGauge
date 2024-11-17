@@ -17,10 +17,12 @@ class SplashScreen extends StatelessWidget {
       );
     });
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xFFFFFFFF), // White background
-        body: Center(
+    return Scaffold(
+      body: Container(
+        width: double.infinity, // Full width
+        height: double.infinity, // Full height
+        color: Colors.white, // White background
+        child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -30,13 +32,6 @@ class SplashScreen extends StatelessWidget {
                 width: 166,
               ),
               const SizedBox(height: 20),
-              const Text(
-                'TOYOTA',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
             ],
           ),
         ),
