@@ -1,0 +1,109 @@
+/* Font inclusion for cross-browser support */
+@font-face {
+    font-family: 'ToyotaFont';
+    src: url('/static/fonts/ToyotaFont.woff2') format('woff2'),
+         url('/static/fonts/ToyotaFont.woff') format('woff'),
+         url('/static/fonts/ToyotaFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Reset some default browser inconsistencies */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'ToyotaFont', Arial, sans-serif; /* Use ToyotaFont with fallbacks */
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Main container for login form */
+.login-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+/* Logo styling */
+.logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Input field group */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px; /* Slightly smaller label text */
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px; /* Smaller input text */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styling */
+button {
+    background-color: #FF0000;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 18px; /* Slightly larger button text */
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold; /* Emphasize the button text */
+}
+
+button:hover {
+    background-color: #d00000;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.user-table thead th {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.user-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.user-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.user-table th, .user-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}

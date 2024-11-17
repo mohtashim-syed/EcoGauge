@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <!-- Include Toyota Font -->
+</head>
+<body>
+    <!-- Main Wrapper -->
+    <div class="wrapper">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <img src="/static/images/toyota.png" alt="Toyota Logo" class="header-logo">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <button class="logout-btn" onclick="window.location.href='/logout'">Logout</button>
+        </header>
+
+        <!-- Main Dashboard Section -->
+        <main class="dashboard">
+            <!-- Upload Dataset Section -->
+            <section class="card">
+                <h2>Upload New Dataset</h2>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <p>
+                        Upload a CSV file containing the dataset you wish to use for fine-tuning. 
+                    </p>
+                    <label for="dataset" class="form-label">Choose Dataset File (CSV):</label>
+                    <input type="file" name="dataset" id="dataset" class="file-input" required>
+                    <label for="model" class="form-label">Select Model for Fine-Tuning:</label>
+                    <select name="model" id="model" class="form-select" required>
+                        <option value="gpt-4o-mini-2024-07-18">GPT-4o Mini (2024-07-18)</option>
+                        <option value="gpt-4o-2024-08-06">GPT-4o (2024-08-06)</option>
+                        <option value="gpt-3.5-turbo-0613">GPT-3.5 Turbo (0613)</option>
+                    </select>
+                    <div class="form-message-wrapper">
+                        <span class="form-message" id="form-message">Invalid input. Please try again.</span>
+                    </div>
+                    <button type="submit" class="upload-btn">Upload and Fine-Tune</button>
+                </form>
+            </section>
+
+            <!-- Reset User Password Section -->
+            <section class="card">
+                <h2>Reset User Password</h2>
+                <form id="resetPasswordForm">
+                    <label for="reset_password_user" class="form-label">User Email</label>
+                    <input type="email" name="reset_password_user" id="reset_password_user" placeholder="Enter user email" class="form-input" required>
+                    <label for="new_password" class="form-label">New Password</label>
+                    <input type="password" name="new_password" id="new_password" placeholder="Enter new password" class="form-input" required>
+                    <button type="submit" class="btn">Reset Password</button>
+                    <div class="form-message-wrapper">
+                        <p id="resetPasswordMessage" class="form-message"></p>
+                    </div>
+                </form>
+            </section>
+
+            <script>
+                document.getElementById('resetPasswordForm').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const userEmail = document.getElementById('reset_password_user').value;
+                const newPassword = document.getElementById('new_password').value;
+                const messageElement = document.getElementById('resetPasswordMessage');
+
+                try {
+                    const response = await fetch('/reset-password', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams({ reset_password_user: userEmail, new_password: newPassword }),
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        messageElement.textContent = data.message;
+                        messageElement.style.color = 'green';
+                    } else {
+                        messageElement.textContent = data.error || 'An error occurred.';
+                        messageElement.style.color = 'red';
+                    }
+                } catch (error) {
+                    messageElement.textContent = 'Unable to process your request. Please try again later.';
+                    messageElement.style.color = 'red';
+                }
+
+                // Ensure the message is visible
+                messageElement.style.visibility = 'visible';
+            });
+
+            </script>
+
+            <!-- Create New User Section -->
+            <section class="card">
+                <h2>Create New User</h2>
+                <form action="/create-user" method="POST" id="createUserForm">
+                    <label for="new_user_fullname" class="form-label">Full Name</label>
+                    <input type="text" name="new_user_fullname" id="new_user_fullname" placeholder="Enter full name" class="form-input" required>
+                    <label for="new_user_email" class="form-label">Email</label>
+                    <input type="email" name="new_user_email" id="new_user_email" placeholder="Enter user email" class="form-input" required>
+                    <label for="new_user_role" class="form-label">Role</label>
+                    <select name="new_user_role" id="new_user_role" class="form-select" required>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                    <button type="submit" class="btn">Create User</button>
+                    <p id="createUserMessage" class="form-message"></p>
+                </form>
+            </section>
+
+            <script>
+                document.getElementById('createUserForm').addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent form submission from refreshing the page
+
+                const form = event.target; // Form element
+                const messageElement = document.getElementById('createUserMessage'); // Target message element
+                const formData = new FormData(form); // Collect form data
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: formData, // Send the form data
+                    });
+
+                    const data = await response.json(); // Parse the response
+
+                    if (response.ok) {
+                        messageElement.textContent = data.message; // Success message
+                        messageElement.style.color = 'green';
+                    } else {
+                        messageElement.textContent = data.error || 'An error occurred.'; // Error message
+                        messageElement.style.color = 'red';
+                    }
+                } catch (error) {
+                    messageElement.textContent = 'Unable to process your request. Please try again later.'; // General error
+                    messageElement.style.color = 'red';
+                    console.error('Error creating user:', error);
+                }
+
+                // Ensure the message is visible
+                messageElement.style.visibility = 'visible';
+                });
+
+            </script>
+
+            <!-- Delete User Section -->
+            <section class="card">
+                <h2>Delete User</h2>
+                <form id="deleteUserForm" action="/delete-user" method="POST">
+                    <label for="delete_user_email" class="form-label">User Email</label>
+                    <input type="email" name="delete_user_email" id="delete_user_email" placeholder="Enter user email" class="form-input" required>
+                    <button type="submit" class="btn">Delete User</button>
+                    <div class="form-message-wrapper">
+                        <p id="deleteUserMessage" class="form-message"></p>
+                    </div>
+                </form>
+            </section>
+            
+            <script>
+                document.getElementById('deleteUserForm').addEventListener('submit', async (event) => {
+                    event.preventDefault(); // Prevent default form submission
+            
+                    const form = event.target; // Get the form element
+                    const messageElement = document.getElementById('deleteUserMessage');
+                    const formData = new FormData(form); // Collect form data
+            
+                    try {
+                        const response = await fetch(form.action, {
+                            method: form.method,
+                            body: formData, // Send the form data
+                        });
+            
+                        if (response.ok) {
+                            const data = await response.json();
+                            messageElement.textContent = data.message; // Display success message
+                            messageElement.style.color = 'green';
+                            messageElement.style.visibility = 'visible';
+                        } else {
+                            const errorData = await response.json();
+                            messageElement.textContent = errorData.error || 'An error occurred.';
+                            messageElement.style.color = 'red';
+                            messageElement.style.visibility = 'visible';
+                        }
+                    } catch (error) {
+                        messageElement.textContent = 'Unable to process your request. Please try again later.';
+                        messageElement.style.color = 'red';
+                        messageElement.style.visibility = 'visible';
+                        console.error('Error deleting user:', error);
+                    }
+                });
+            </script>
+            
+            <!-- Trained Models Section -->
+            <section class="card">
+                <h2>Trained Models</h2>
+                <table class="model-table">
+                    <thead>
+                        <tr>
+                            <th>Model Type</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for model in models %}
+                        <tr>
+                            <td>{{ model.type }}</td>
+                            <td>{{ model.file }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- User List Section -->
+            <section class="card">
+                <h2>User List</h2>
+                <div class="table-container">
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body">
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.fullname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ 'Admin' if user.isAdmin else 'User' }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button id="prev-page" disabled>Previous</button>
+                    <span id="page-info"></span>
+                    <button id="next-page">Next</button>
+                </div>
+            </section>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const users = {{ users|tojson }};
+                    const rowsPerPage = 4;
+                    let currentPage = 1;
+
+                    const tableBody = document.getElementById("user-table-body");
+                    const prevPageButton = document.getElementById("prev-page");
+                    const nextPageButton = document.getElementById("next-page");
+                    const pageInfo = document.getElementById("page-info");
+
+                    function renderTable(page) {
+                        tableBody.innerHTML = "";
+                        const start = (page - 1) * rowsPerPage;
+                        const end = start + rowsPerPage;
+                        const pageUsers = users.slice(start, end);
+
+                        pageUsers.forEach(user => {
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
+                                <td>${user.fullname}</td>
+                                <td>${user.email}</td>
+                                <td>${user.isAdmin ? "Admin" : "User"}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+
+                        prevPageButton.disabled = page === 1;
+                        nextPageButton.disabled = end >= users.length;
+                        pageInfo.textContent = `Page ${page} of ${Math.ceil(users.length / rowsPerPage)}`;
+                    }
+
+                    prevPageButton.addEventListener("click", () => {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            renderTable(currentPage);
+                        }
+                    });
+
+                    nextPageButton.addEventListener("click", () => {
+                        if (currentPage * rowsPerPage < users.length) {
+                            currentPage++;
+                            renderTable(currentPage);
+                        }
+                    });
+
+                    renderTable(currentPage);
+                });
+            </script>
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <p>&copy; 2024 Toyota Admin Dashboard. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

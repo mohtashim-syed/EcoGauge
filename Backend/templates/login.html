@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <style>
+        @font-face {
+            font-family: 'ToyotaFont';
+            src: url('/static/fonts/ToyotaFont.woff2') format('woff2'),
+                 url('/static/fonts/ToyotaFont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        async function handleLogin(event) {
+            event.preventDefault(); // Prevent form default submission
+        
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+        
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ email, password }),
+                });
+        
+                // Handle responses explicitly without triggering `catch`
+                if (response.ok) {
+                    // Redirect to dashboard after successful login
+                    window.location.href = '/dashboard';
+                } else if (response.status === 401) {
+                    // Handle 401 Unauthorized
+                    let errorMessage = 'Incorrect email or password. Please try again.';
+                    try {
+                        // Check if the response has a JSON Content-Type
+                        const contentType = response.headers.get('content-type');
+                        if (contentType && contentType.includes('application/json')) {
+                            const errorData = await response.json();
+                            errorMessage = errorData.error || errorMessage;
+                        }
+                    } catch (e) {
+                        console.error('Error parsing JSON:', e);
+                        // If parsing fails, keep the default error message
+                    }
+                    document.querySelector('.error-message').textContent = errorMessage;
+                } else {
+                    // Handle other non-2xx responses
+                    document.querySelector('.error-message').textContent = 
+                        'An unexpected error occurred. Please try again later.';
+                }
+            } catch (error) {
+                // Handle actual network errors or unexpected issues
+                console.error('Login error:', error);
+                document.querySelector('.error-message').textContent = 
+                    'Unable to process your request. Please check your connection.';
+            }
+        }
+        </script>
+        
+</head>
+<body>
+    <div class="login-container">
+        <img src="/static/images/toyota.png" alt="Toyota Logo" class="logo">
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div class="error-message"></div>
+        </form>
+    </div>
+</body>
+</html>

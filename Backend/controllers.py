@@ -6,9 +6,6 @@ import secrets
 import base64
  
 
-
-### todo, fix status code
-
 def signin_handler(data):
 
     MISSING_CREDENTIALS_ERROR = jsonify({"error": "Missing Email or Password"}), 401
@@ -36,7 +33,6 @@ def signin_handler(data):
 
     # Generate an API key as a session
     
-    # TODO: lol
     while True:
         token = secrets.token_bytes(32)
         # Encode as URL-safe base64 string
@@ -52,6 +48,24 @@ def signin_handler(data):
     
     # Returns an API key on successfull authentication
     return jsonify({"apikey": api_key})
+
+
+
+def forgotpassword_handler(data):
+
+    MISSING_EMAIL_ERROR = jsonify({"error": "Missing or Incorrect Email"}), 400
+
+    # Validate the presence of 'email' and 'password' keys
+    if not {'email'}.issubset(data):
+        return MISSING_EMAIL_ERROR
+
+    email = data['email'].lower()
+
+    # TODO: No SMTP for now, will be implemented in production. Password changes can be done in the admin portal.
+
+    # Returns an API key on successfull authentication
+    return jsonify({"status": "success"})
+
 
 def get_all_data():
     # Query the database for the data of the car
@@ -73,3 +87,6 @@ def get_all_data():
 
     # Return the data in JSON format
     return jsonify({"data": data})
+
+
+### Admin Controllers
