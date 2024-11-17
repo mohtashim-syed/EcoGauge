@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'simple_line_graph.dart'; // Import the graph widget
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: const Color(0xFFEB0A1E), // Toyota red color
         title: const Center(
           child: Text(
-            "TOYOTA",
+            "ECOGAUGE",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
@@ -26,7 +27,7 @@ class HomePage extends StatelessWidget {
             children: [
               // Greeting Text
               const Text(
-                "Hello Koji Sato, what data would you like to see today?",
+                "Hello Koji Sato, how can we assist you in exploring the data today?",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -37,7 +38,7 @@ class HomePage extends StatelessWidget {
               // Input Text Box
               TextField(
                 decoration: InputDecoration(
-                  hintText: "Enter specific data or search...",
+                  hintText: "Discover insights - Just ask Miles!",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -46,23 +47,16 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Placeholder for Graph Area
+              // Graph Area with the SimpleLineGraph Widget
               Container(
-                height: 200, // Fixed height for the graph placeholder
+                height: 350, // Increased height for better spacing
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.shade300),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(
-                  child: Text(
-                    "Graph will be displayed here",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
+                child: SimpleLineGraph(), // Integrated graph widget
               ),
+
               const SizedBox(height: 24),
 
               // Dropdown for Toyota Models and Trim
@@ -75,7 +69,8 @@ class HomePage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 16),
                       ),
                       items: const [
                         DropdownMenuItem(
@@ -109,7 +104,8 @@ class HomePage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 16),
                       ),
                       items: const [
                         DropdownMenuItem(
@@ -152,9 +148,21 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                     columns: const [
-                      DataColumn(label: Text("Year")),
-                      DataColumn(label: Text("City MPG")),
-                      DataColumn(label: Text("Highway MPG")),
+                      DataColumn(
+                        label: Center(
+                          child: Text("Year"),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Center(
+                          child: Text("City MPG"),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Center(
+                          child: Text("Highway MPG"),
+                        ),
+                      ),
                     ],
                     rows: List<DataRow>.generate(
                       5,
@@ -168,9 +176,21 @@ class HomePage extends StatelessWidget {
                             (states) => color,
                           ),
                           cells: [
-                            DataCell(Text("${2021 + index}")),
-                            DataCell(Text("${30 + index}")), // City MPG
-                            DataCell(Text("${38 + index}")), // Highway MPG
+                            DataCell(
+                              Center(
+                                child: Text("${2021 + index}"),
+                              ),
+                            ),
+                            DataCell(
+                              Center(
+                                child: Text("${30 + index}"),
+                              ),
+                            ), // City MPG
+                            DataCell(
+                              Center(
+                                child: Text("${38 + index}"),
+                              ),
+                            ), // Highway MPG
                           ],
                         );
                       },
