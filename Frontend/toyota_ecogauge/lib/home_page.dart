@@ -9,14 +9,26 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFEB0A1E), // Toyota red color
-        title: const Center(
-          child: Text(
-            "ECOGAUGE",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/image2.png', // Path to the image
+              height: 40, // Adjust the height to fit within the banner
             ),
-          ),
+            const SizedBox(width: 10), // Space between image and text
+            const Expanded(
+              child: Center(
+                child: Text(
+                  "ECOGAUGE",
+                  style: TextStyle(
+                    fontFamily: 'Roboto', // Use the Roboto font
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       body: SingleChildScrollView(
@@ -31,6 +43,7 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Roboto', // Set Roboto font
                 ),
               ),
               const SizedBox(height: 16),
@@ -146,21 +159,31 @@ class HomePage extends StatelessWidget {
                     headingTextStyle: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Roboto', // Use Roboto font
                     ),
                     columns: const [
                       DataColumn(
                         label: Center(
-                          child: Text("Year"),
+                          child: Text(
+                            "Year",
+                            style: TextStyle(fontFamily: 'Roboto'),
+                          ),
                         ),
                       ),
                       DataColumn(
                         label: Center(
-                          child: Text("City MPG"),
+                          child: Text(
+                            "City MPG",
+                            style: TextStyle(fontFamily: 'Roboto'),
+                          ),
                         ),
                       ),
                       DataColumn(
                         label: Center(
-                          child: Text("Highway MPG"),
+                          child: Text(
+                            "Highway MPG",
+                            style: TextStyle(fontFamily: 'Roboto'),
+                          ),
                         ),
                       ),
                     ],
@@ -178,17 +201,26 @@ class HomePage extends StatelessWidget {
                           cells: [
                             DataCell(
                               Center(
-                                child: Text("${2021 + index}"),
+                                child: Text(
+                                  "${2021 + index}",
+                                  style: const TextStyle(fontFamily: 'Roboto'),
+                                ),
                               ),
                             ),
                             DataCell(
                               Center(
-                                child: Text("${30 + index}"),
+                                child: Text(
+                                  "${30 + index}",
+                                  style: const TextStyle(fontFamily: 'Roboto'),
+                                ),
                               ),
                             ), // City MPG
                             DataCell(
                               Center(
-                                child: Text("${38 + index}"),
+                                child: Text(
+                                  "${38 + index}",
+                                  style: const TextStyle(fontFamily: 'Roboto'),
+                                ),
                               ),
                             ), // Highway MPG
                           ],
