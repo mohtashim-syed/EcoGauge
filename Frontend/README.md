@@ -23,7 +23,7 @@ This repository contains the codebase for the EcoGauge project, a data-driven ap
 
 ### Prerequisites
 - **Flutter SDK**: Ensure you have the latest Flutter SDK installed for the MobileApp.
-- **Node.js/Backend Environment**: Required for the AdminPanel (if applicable).
+- **Flask/Backend Environment**: Required for the AdminPanel (if applicable).
 
 ### Installation
 
