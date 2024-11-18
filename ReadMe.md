@@ -14,3 +14,10 @@ Backend: Utilized open government datasets on fuel economy, processed and served
 Flask Visualization: Integrated libraries for interactive graphing and tabular data representation. 
 AI Chatbot: Incorporated GPT-based chatbots (Miles and Finn) to provide natural language data querying and insights. 
 Modular Architecture: Designed for scalability and easy integration of future datasets and features.
+
+## Challenges we ran into
+Data Parsing: Extracting and structuring data from static PDFs (2021-2025 datasets) into a format optimized for querying and visualization. 
+UI Consistency: Ensuring a seamless, visually appealing interface across different devices and platforms. 
+AI Integration: Creating a conversational interface that accurately interprets user queries and interacts with the structured data. 
+Time Constraints: Balancing feature implementation and testing within a tight 24-hour hackathon timeline.
+
