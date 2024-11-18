@@ -21,3 +21,5 @@ UI Consistency: Ensuring a seamless, visually appealing interface across differe
 AI Integration: Creating a conversational interface that accurately interprets user queries and interacts with the structured data. 
 Time Constraints: Balancing feature implementation and testing within a tight 24-hour hackathon timeline.
 
+## Accomplishments that we're proud of
+Successfully implemented a fine-tuned AI-powered chatbot integration for natural language querying. Developed an intuitive and visually consistent *cross-platform* interface using Flutter within 24 hours. Processed and visualized large volumes of fuel economy data into meaningful, user-friendly formats.
