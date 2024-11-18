@@ -23,3 +23,10 @@ Time Constraints: Balancing feature implementation and testing within a tight 24
 
 ## Accomplishments that we're proud of
 Successfully implemented a fine-tuned AI-powered chatbot integration for natural language querying. Developed an intuitive and visually consistent *cross-platform* interface using Flutter within 24 hours. Processed and visualized large volumes of fuel economy data into meaningful, user-friendly formats.
+
+## What we learned
+The importance of data cleaning and preparation when working with unstructured sources like PDFs. 
+How to leverage Flutter for building scalable, cross-platform applications efficiently.
+Best practices for integrating AI tools (GPT-based chatbots) with structured backend systems. 
+The value of teamwork and effective communication when working under tight deadlines.
+
