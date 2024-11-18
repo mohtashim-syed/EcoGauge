@@ -30,3 +30,9 @@ How to leverage Flutter for building scalable, cross-platform applications effic
 Best practices for integrating AI tools (GPT-based chatbots) with structured backend systems. 
 The value of teamwork and effective communication when working under tight deadlines.
 
+## What's next for Toyota EcoGauge
+Expanded Datasets: Integrate fuel economy data for more manufacturers and additional years to broaden the platform's scope.
+Advanced Analytics: Provide deeper insights, such as predictive trends, CO2 emission comparisons, and energy savings analysis.
+Gamification: Introduce features to motivate eco-friendly driving habits, such as fuel-saving challenges and rewards.
+Integration with IoT: Explore compatibility with connected vehicles for real-time fuel economy monitoring.
+Deployment: Launch Toyota EcoGauge as a public app, accessible to consumers, researchers, and automotive professionals globally.
