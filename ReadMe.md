@@ -1,6 +1,11 @@
 # EcoGauge
 ### EcoGauge is a Flutter-based application designed to provide users with insightful data visualizations and interactions related to environmental metrics. Leveraging the power of large language models (LLMs), EcoGauge offers a user-friendly interface to explore and analyze environmental data effectively.
 
+## Try It Yourself
+https://www.ecogauge.tech
+user: test@toyota.com
+pass: test
+
 ## What it does
 Toyota EcoGauge is a cross-platform application that allows users to:
 - Query and visualize vehicle fuel economy data for Toyota models from 2021-2025.
