@@ -5,6 +5,7 @@
 https://www.ecogauge.tech
 - user: test@toyota.com
 - pass: test
+This is the access to the admin dashboard, which will give you access to train and fine tune an AI model witha CSV dataset. It allows you access to add, update, or delete users. For the user dashboard, on the app, a demo video is on the following website: https://devpost.com/software/toyota-ecogauge
 
 ## What it does
 Toyota EcoGauge is a cross-platform application that allows users to:
